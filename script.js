@@ -157,3 +157,59 @@ const playGame = () => {
 
 const makeplayer = player();
 console.log(makeplayer());
+
+const determineStartingPlayer = () => {
+  //player choses heads or tails
+  const choseCoinSide = () => {
+    let userInput = prompt("Player 1, heads or tails?");
+    if (userInput.toLowerCase() === "heads") {
+      const player1Coin = "heads";
+      const player2Coin = "tails";
+      console.log(`player 1 = ${player1Coin} -- player 2 = ${player2Coin}` )
+      return {player1Coin, player2Coin};
+    }
+    if (userInput.toLowerCase() === "tails") {
+      const player1Coin = "tails";
+      const player2Coin = "heads";
+      console.log(`player 1 = ${player1Coin} -- player 2 = ${player2Coin}` )
+      return {player1Coin, player2Coin}
+    }
+  }
+
+  //determine starting player 
+  const coinFlip = () => {
+    let coinFlip = Math.floor(Math.random() * 10);
+    if (coinFlip < 5) {
+      coinFlip = true;
+      console.log("Coin was tails. Under 5.");
+      return coinFlip;
+    }
+    else {
+      coinFlip = false;
+      console.log("Coin was heads. Over 5.");
+      return coinFlip
+    }
+  }
+
+  const coinFlipResults = (player1Coin, player2Coin, coinFlip) => {
+    if (player1Coin === "heads" && coinFlip === false || player1Coin === "tails" && coinFlip === true) {
+      console.log("Player 1 has won the coin flip. Player 1 starts.")
+      const startingPlayer = player1;
+      return startingPlayer
+    }
+    else if (player2Coin === "tails" && coinFlip === true || player2Coin === "heads" && coinFlip === false) {
+      console.log("Player 2 has won the coin flip. Player 2 starts.");
+      const startingPlayer = player2;
+      return startingPlayer;
+    }
+  }
+  return {choseCoinSide, coinFlip, coinFlipResults}
+}
+
+const playerCoin = determineStartingPlayer();
+console.log(playerCoin.choseCoinSide())
+console.log(playerCoin.coinFlip());
+console.log(playerCoin.coinFlipResults()); // undefined WHY? because it cant access the variables needed. so how do i pass it? it is likely that i need 
+                                           // to put coinflip results into another area.. then somehow take the data from player chose coin and player coin flip and then it could work
+                                           // as this data somehow only works outside of the functions
+console.log("deez nuts boy");
