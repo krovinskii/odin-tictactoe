@@ -152,7 +152,7 @@
     }
     return { player1, player2 }; 
   };
-  return definePlayer;
+  return { definePlayer };
 };
 
 
@@ -198,11 +198,13 @@ const determineStartingPlayer = () => {
 
 //mark starting player
 
-const markStartingPlayer = (userChosenSide, coinFlipResults) => {
-  
+const markStartingPlayer = () => {
+  //get player data
   const makePlayer = player();
-  console.log(makePlayer());
-  
+  const { player1, player2 } = makePlayer.definePlayer();
+  console.log(player1);
+
+  //get data from other functions and use it here
   const playerCoin = determineStartingPlayer();
   userChosenSide = playerCoin.choseCoinSide();
   coinFlipResults = playerCoin.coinFlip();
@@ -211,16 +213,18 @@ const markStartingPlayer = (userChosenSide, coinFlipResults) => {
     
     if (player1Coin === "heads" && coinFlipResults === false || player1Coin === "tails" && coinFlipResults === true) {
       console.log("Player 1 has won the coin flip. Player 1 starts.")
-      const startingPlayer = "player1";
+      const startingPlayer = player1;
+      console.log(`${startingPlayer} is the starting player.`);
       return startingPlayer
     }
     else if (player2Coin === "tails" && coinFlipResults === true || player2Coin === "heads" && coinFlipResults === false) {
       console.log("Player 2 has won the coin flip. Player 2 starts.");
-      const startingPlayer = "player2";
+      const startingPlayer = player2;
+      console.log(`${startingPlayer} is the starting player.`);
       return startingPlayer;
     }
   }
   return { startingPlayer1 };
 }
 const result = markStartingPlayer();
-console.log(result.startingPlayer1());
+result.startingPlayer1();
