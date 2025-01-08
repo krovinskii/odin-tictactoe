@@ -1,5 +1,5 @@
 
-const playGame = () => {
+/*const playGame = () => {
   // Grid Creation
   const grid = [];
   
@@ -130,7 +130,7 @@ const playGame = () => {
  //to make grid, do const grid = playGame() -- then do grid.makeGrid() to call the object(function) on the new variable to  access it. otherwise will not work.
  const grid = playGame()
  console.log(grid.makeGrid());
- console.log(grid.logInputX(2));
+ console.log(grid.logInputX(2));*/
 
 
  //Below here is where we are going to restructure the code. I need to seperate into seperate factories. everything up top is mumbo jumbo
@@ -155,8 +155,7 @@ const playGame = () => {
   return definePlayer;
 };
 
-const makeplayer = player();
-console.log(makeplayer());
+
 
 const determineStartingPlayer = () => {
   //player choses heads or tails
@@ -176,7 +175,7 @@ const determineStartingPlayer = () => {
     }
   }
 
-  //determine starting player 
+  //coin flip logic and
   const coinFlip = () => {
     let coinFlip = Math.floor(Math.random() * 10);
     if (coinFlip < 5) {
@@ -191,25 +190,37 @@ const determineStartingPlayer = () => {
     }
   }
 
-  const coinFlipResults = (player1Coin, player2Coin, coinFlip) => {
-    if (player1Coin === "heads" && coinFlip === false || player1Coin === "tails" && coinFlip === true) {
+ 
+  return {choseCoinSide, coinFlip}
+}
+
+
+
+//mark starting player
+
+const markStartingPlayer = (userChosenSide, coinFlipResults) => {
+  
+  const makePlayer = player();
+  console.log(makePlayer());
+  
+  const playerCoin = determineStartingPlayer();
+  userChosenSide = playerCoin.choseCoinSide();
+  coinFlipResults = playerCoin.coinFlip();
+  const { player1Coin, player2Coin } = userChosenSide;
+  const startingPlayer1 = () => {
+    
+    if (player1Coin === "heads" && coinFlipResults === false || player1Coin === "tails" && coinFlipResults === true) {
       console.log("Player 1 has won the coin flip. Player 1 starts.")
-      const startingPlayer = player1;
+      const startingPlayer = "player1";
       return startingPlayer
     }
-    else if (player2Coin === "tails" && coinFlip === true || player2Coin === "heads" && coinFlip === false) {
+    else if (player2Coin === "tails" && coinFlipResults === true || player2Coin === "heads" && coinFlipResults === false) {
       console.log("Player 2 has won the coin flip. Player 2 starts.");
-      const startingPlayer = player2;
+      const startingPlayer = "player2";
       return startingPlayer;
     }
   }
-  return {choseCoinSide, coinFlip, coinFlipResults}
+  return { startingPlayer1 };
 }
-
-const playerCoin = determineStartingPlayer();
-console.log(playerCoin.choseCoinSide())
-console.log(playerCoin.coinFlip());
-console.log(playerCoin.coinFlipResults()); // undefined WHY? because it cant access the variables needed. so how do i pass it? it is likely that i need 
-                                           // to put coinflip results into another area.. then somehow take the data from player chose coin and player coin flip and then it could work
-                                           // as this data somehow only works outside of the functions
-console.log("deez nuts boy");
+const result = markStartingPlayer();
+console.log(result.startingPlayer1());
