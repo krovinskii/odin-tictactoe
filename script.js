@@ -172,6 +172,7 @@ const userInputs = () => {
 
 //Alternating turns and check for wins
 const userTurns = () => {
+  const result = markStartingPlayer();
   const resultsText = document.querySelector(".gameResults");
   const inputs = userInputs(); // Access the user inputs functions
   const grid = inputs.makeGrid(); // Initialize the grid
@@ -241,9 +242,12 @@ const convertToUI = () => {
   const grid6 = document.getElementById("grid7");
   const grid7 = document.getElementById("grid8");
   const grid8 = document.getElementById("grid9");
-  const userClickLocation = null;
-  const currentPlayer =
-    "This is a placeholder. I need to pass through my player from one of the objects above.";
+
+  let userClickLocation = null;
+
+  const getStarter = userTurns();
+  const currentPlayer = userTurns.alternateTurns();
+
   const resultsText = document.querySelector(".gameResults");
   //When grid is clicked, assign that to the index of the grid.
   const grid0Clicked = grid0.addEventListener("click", () => {
