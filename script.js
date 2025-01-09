@@ -1,3 +1,4 @@
+//Define the player. Player will either be X or O depending on what they selected in the prompt. Prompt needs to be replaced by UI.
 const player = () => {
   const definePlayer = () => {
     let player1 = "";
@@ -16,7 +17,7 @@ const player = () => {
   };
   return { definePlayer };
 };
-
+//Player selects heads or tails in the prompt. A coin is flipped. The winner gets to start.
 const determineStartingPlayer = () => {
   //player choses heads or tails
   const choseCoinSide = () => {
@@ -35,7 +36,7 @@ const determineStartingPlayer = () => {
     }
   };
 
-  //coin flip logic and
+  //coin flip logic
   const coinFlip = () => {
     let coinFlip = Math.floor(Math.random() * 10);
     if (coinFlip < 5) {
@@ -52,8 +53,7 @@ const determineStartingPlayer = () => {
   return { choseCoinSide, coinFlip };
 };
 
-//mark starting player
-
+//mark starting player X or O
 const markStartingPlayer = () => {
   //get player data
   const makePlayer = player();
@@ -211,3 +211,14 @@ const playGame = userTurns();
 playGame.alternateTurns();
 
 //NEED TO CHECK FOR TIES, ALSO NEED TO SET UP CORRECT THE ALTERNATING TURNS SO IT DOESNT SKIP USER!
+/*----------------------To Do--------------------------
+1. When user clicks on a grid space, that should mark their turn. 
+  a. Add variables for each grid
+  b. Add event listeners to these variables
+      -Event listener should convert the click into the index on the grid, and return the value as an integer to userInput
+  c. The gameResults <div> should update with: 
+                                              -Whose turn it is
+                                              -Who wins the game
+                                              -A tie 
+  d. The newGame <button> needs functionality. It should reset the grid back to
+     null and clear all previous clicks. We could make it easy and just refresh page... lol.
