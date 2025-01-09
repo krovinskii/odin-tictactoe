@@ -31,6 +31,12 @@
   display: flex;
   justify-content: center;
   margin-top: 1rem;
+  background: -webkit-linear-gradient(#ff90f8, #7593f5);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 800;
+  letter-spacing: 0.75ch;
+  text-shadow: 4px 2px 7px rgba(0, 0, 0, 0.1);
 }
 .gameGrid {
   display: grid;
@@ -45,8 +51,11 @@
   align-items: center;
   justify-content: center;
   font-size: 6rem;
-  border: 1px solid white;
+  border: 2px solid white;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  background: -webkit-linear-gradient(#dd1ed0, #7593f5);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 .gameControls {
   display: flex;
