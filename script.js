@@ -230,6 +230,7 @@ const userTurns = () => {
 const convertToUI = () => {
   const userInputsInConvertToUI = userInputs();
   const grid = userInputsInConvertToUI.makeGrid();
+  console.log(grid);
   //Get grid locations, assign them a variable correspoinding to the index of the array
   const grid0 = document.getElementById("grid1");
   const grid1 = document.getElementById("grid2");
@@ -286,7 +287,7 @@ const convertToUI = () => {
   const newGameLogic = () => {
     userInputsInConvertToUI.makeGrid();
     for (let i = 0; i < 9; i++) {
-      const gridElement = document.getElementById(`grid${i}`);
+      const gridElement = document.getElementById(`grid${i + 1}`);
       gridElement.innerText = "";
     }
   };
