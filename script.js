@@ -209,3 +209,5 @@ const userTurns = () => {
 
 const playGame = userTurns();
 playGame.alternateTurns();
+
+//NEED TO CHECK FOR TIES, ALSO NEED TO SET UP CORRECT THE ALTERNATING TURNS SO IT DOESNT SKIP USER!
