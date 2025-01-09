@@ -20,18 +20,19 @@ const player = () => {
 //Player selects heads or tails in the prompt. A coin is flipped. The winner gets to start.
 const determineStartingPlayer = () => {
   //player choses heads or tails
+  const resultsText = document.querySelector(".gameResults");
   const choseCoinSide = () => {
     let userInput = prompt("Player 1, heads or tails?");
     if (userInput.toLowerCase() === "heads") {
       const player1Coin = "heads";
       const player2Coin = "tails";
-      console.log(`player 1 = ${player1Coin} -- player 2 = ${player2Coin}`);
+      resultsText.innerText = `player 1 = ${player1Coin} -- player 2 = ${player2Coin}`;
       return { player1Coin, player2Coin };
     }
     if (userInput.toLowerCase() === "tails") {
       const player1Coin = "tails";
       const player2Coin = "heads";
-      console.log(`player 1 = ${player1Coin} -- player 2 = ${player2Coin}`);
+      resultsText.innerText = `player 1 = ${player1Coin} -- player 2 = ${player2Coin}`;
       return { player1Coin, player2Coin };
     }
   };
@@ -41,11 +42,11 @@ const determineStartingPlayer = () => {
     let coinFlip = Math.floor(Math.random() * 10);
     if (coinFlip < 5) {
       coinFlip = true;
-      console.log("Coin was tails. Under 5.");
+      resultsText.innerText = "Coin was tails. Under 5.";
       return coinFlip;
     } else {
       coinFlip = false;
-      console.log("Coin was heads. Over 5.");
+      resultsText.innerText = "Coin was heads. Over 5.";
       return coinFlip;
     }
   };
@@ -56,9 +57,10 @@ const determineStartingPlayer = () => {
 //mark starting player X or O
 const markStartingPlayer = () => {
   //get player data
+  const resultsText = document.querySelector(".gameResults");
   const makePlayer = player();
   const { player1, player2 } = makePlayer.definePlayer();
-  console.log(`Player 1 has chosen ${player1}`);
+  resultsText.innerText = `Player 1 has chosen ${player1}`;
 
   //get data from other functions and use it here
   const playerCoin = determineStartingPlayer();
@@ -72,9 +74,10 @@ const markStartingPlayer = () => {
       (player1Coin === "heads" && coinFlipResults === false) ||
       (player1Coin === "tails" && coinFlipResults === true)
     ) {
-      console.log("Player 1 has won the coin flip. Player 1 starts.");
+      resultsText.innerText =
+        "Player 1 has won the coin flip. Player 1 starts.";
       const startingPlayer = player1;
-      console.log(`${startingPlayer} is the starting player.`);
+      resultsText.innerText = `${startingPlayer} is the starting player.`;
       let secondPlayer = "";
       startingPlayer === "X" ? (secondPlayer = "O") : (secondPlayer = "X");
 
@@ -84,9 +87,10 @@ const markStartingPlayer = () => {
       (player2Coin === "tails" && coinFlipResults === true) ||
       (player2Coin === "heads" && coinFlipResults === false)
     ) {
-      console.log("Player 2 has won the coin flip. Player 2 starts.");
+      resultsText.innerText =
+        "Player 2 has won the coin flip. Player 2 starts.";
       const startingPlayer = player2;
-      console.log(`${startingPlayer} is the starting player.`);
+      resultsText.innerText = `${startingPlayer} is the starting player.`;
       let secondPlayer = "";
       startingPlayer === "X" ? (secondPlayer = "O") : (secondPlayer = "X");
       return { startingPlayer, secondPlayer };
@@ -95,13 +99,11 @@ const markStartingPlayer = () => {
   };
   return { startingPlayer1 };
 };
-const result = markStartingPlayer();
-result.startingPlayer1();
 
 //get user selections
 const userInputs = () => {
-  const grid = [];
   const makeGrid = () => {
+    const grid = [];
     for (let i = 0; i < 9; i++) {
       grid.push(null);
     }
@@ -170,6 +172,7 @@ const userInputs = () => {
 
 //Alternating turns and check for wins
 const userTurns = () => {
+  const resultsText = document.querySelector(".gameResults");
   const inputs = userInputs(); // Access the user inputs functions
   const grid = inputs.makeGrid(); // Initialize the grid
   const { startingPlayer, secondPlayer } = result.startingPlayer1();
@@ -193,7 +196,7 @@ const userTurns = () => {
       winner = inputs.checkIfWinner();
 
       if (winner) {
-        console.log(`${winner} wins the game!`);
+        resultsText.innerText = `${winner} wins the game!`;
         break;
       }
 
@@ -207,18 +210,99 @@ const userTurns = () => {
   return alternateTurns();
 };
 
-const playGame = userTurns();
-playGame.alternateTurns();
+//const playGame = userTurns();
+//playGame.alternateTurns();
 
-//NEED TO CHECK FOR TIES, ALSO NEED TO SET UP CORRECT THE ALTERNATING TURNS SO IT DOESNT SKIP USER!
 /*----------------------To Do--------------------------
 1. When user clicks on a grid space, that should mark their turn. 
-  a. Add variables for each grid
+  a. Add variables for each grid x
   b. Add event listeners to these variables
       -Event listener should convert the click into the index on the grid, and return the value as an integer to userInput
-  c. The gameResults <div> should update with: 
+2. The gameResults <div> should update with: 
                                               -Whose turn it is
                                               -Who wins the game
                                               -A tie 
-  d. The newGame <button> needs functionality. It should reset the grid back to
+3. The gameResul <button> needs functionality. It should reset the grid back to
      null and clear all previous clicks. We could make it easy and just refresh page... lol.
+4. Add logic to check for ties.
+5. Fix bug where if user inputs wrong input, it lets them try again. */
+
+const convertToUI = () => {
+  const userInputsInConvertToUI = userInputs();
+  const grid = userInputsInConvertToUI.makeGrid();
+  //Get grid locations, assign them a variable correspoinding to the index of the array
+  const grid0 = document.getElementById("grid1");
+  const grid1 = document.getElementById("grid2");
+  const grid2 = document.getElementById("grid3");
+  const grid3 = document.getElementById("grid4");
+  const grid4 = document.getElementById("grid5");
+  const grid5 = document.getElementById("grid6");
+  const grid6 = document.getElementById("grid7");
+  const grid7 = document.getElementById("grid8");
+  const grid8 = document.getElementById("grid9");
+  const userClickLocation = null;
+  const currentPlayer =
+    "This is a placeholder. I need to pass through my player from one of the objects above.";
+  const resultsText = document.querySelector(".gameResults");
+  //When grid is clicked, assign that to the index of the grid.
+  const grid0Clicked = grid0.addEventListener("click", () => {
+    userClickLocation = grid[0];
+    grid0.innerText = `${currentPlayer}`;
+  });
+  const grid1Clicked = grid1.addEventListener("click", () => {
+    userClickLocation = grid[1];
+    grid1.innerText = `${currentPlayer}`;
+  });
+  const grid2Clicked = grid2.addEventListener("click", () => {
+    userClickLocation = grid[2];
+    grid2.innerText = `${currentPlayer}`;
+  });
+  const grid3Clicked = grid3.addEventListener("click", () => {
+    userClickLocation = grid[3];
+    grid3.innerText = `${currentPlayer}`;
+  });
+  const grid4Clicked = grid4.addEventListener("click", () => {
+    userClickLocation = grid[4];
+    grid4.innerText = `${currentPlayer}`;
+  });
+
+  const grid5Clicked = grid5.addEventListener("click", () => {
+    userClickLocation = grid[5];
+    grid5.innerText = `${currentPlayer}`;
+  });
+  const grid6Clicked = grid6.addEventListener("click", () => {
+    userClickLocation = grid[6];
+    grid6.innerText = `${currentPlayer}`;
+  });
+  const grid7Clicked = grid7.addEventListener("click", () => {
+    userClickLocation = grid[7];
+    grid7.innerText = `${currentPlayer}`;
+  });
+  const grid8Clicked = grid8.addEventListener("click", () => {
+    userClickLocation = grid[8];
+    grid8.innerText = `${currentPlayer}`;
+  });
+
+  const newGameLogic = () => {
+    userInputsInConvertToUI.makeGrid();
+    for (let i = 0; i < 9; i++) {
+      const gridElement = document.getElementById(`grid${i}`);
+      gridElement.innerText = "";
+    }
+  };
+
+  const newGameClicked = () => {
+    const newGameButton = document.getElementById("newGame");
+    newGameButton.addEventListener("click", () => {
+      newGameLogic();
+      const result = markStartingPlayer();
+      result.startingPlayer1();
+    });
+  };
+  return { newGameClicked };
+};
+
+const blah = convertToUI();
+window.onload = () => {
+  blah.newGameClicked();
+};
