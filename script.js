@@ -228,3 +228,76 @@ const markStartingPlayer = () => {
 }
 const result = markStartingPlayer();
 result.startingPlayer1();
+
+
+
+
+//get user selections 
+const userInputs = () => {
+  const grid = [];
+  const makeGrid = () => {
+    for (let i = 0; i < 9; i++) {
+      grid.push(null);
+    }
+    return grid;
+  };
+  const logInputX = (input) => {
+    // Check if input exists
+    if (grid[input] === null) {
+      grid[input] = 'X';
+    } else {
+      alert("You must choose somewhere not picked already.");
+    }
+    return grid;
+  };
+  
+  const logInputO = (input) => {
+    // Check if input exists
+    if (grid[input] === null) {
+      grid[input] = 'O';
+    } else {
+      alert("You must choose somewhere not picked already.");
+    }
+    return grid;
+  };
+  const checkIfWinner = () => {
+    // Check X wins
+    if ((grid[0] === 'X' && grid[1] === 'X' && grid[2] === 'X') ||
+        (grid[0] === 'X' && grid[3] === 'X' && grid[6] === 'X') ||
+        (grid[0] === 'X' && grid[4] === 'X' && grid[8] === 'X') ||
+        (grid[2] === 'X' && grid[5] === 'X' && grid[8] === 'X') ||
+        (grid[6] === 'X' && grid[7] === 'X' && grid[8] === 'X') ||
+        (grid[2] === 'X' && grid[4] === 'X' && grid[6] === 'X') ||
+        (grid[3] === 'X' && grid[4] === 'X' && grid[5] === 'X') ||
+        (grid[1] === 'X' && grid[4] === 'X' && grid[7] === 'X')) {
+      alert("X wins the game!");
+      return "X";
+    }
+    
+    // Check O wins
+    if ((grid[0] === 'O' && grid[1] === 'O' && grid[2] === 'O') ||
+        (grid[0] === 'O' && grid[3] === 'O' && grid[6] === 'O') ||
+        (grid[0] === 'O' && grid[4] === 'O' && grid[8] === 'O') ||
+        (grid[2] === 'O' && grid[5] === 'O' && grid[8] === 'O') ||
+        (grid[6] === 'O' && grid[7] === 'O' && grid[8] === 'O') ||
+        (grid[2] === 'O' && grid[4] === 'O' && grid[6] === 'O') ||
+        (grid[3] === 'O' && grid[4] === 'O' && grid[5] === 'O') ||
+        (grid[1] === 'O' && grid[4] === 'O' && grid[7] === 'O')) {
+      alert("O wins the game!");
+      return "O";
+    }
+    else {
+      return false;
+    }
+  };
+ return { logInputX, logInputO, makeGrid, checkIfWinner } 
+}
+
+const bleh = userInputs();
+console.log(bleh.makeGrid())
+console.log(bleh.logInputO(2));
+
+
+//need to set up alternating turns.. i suppose a loop would work for this until we meet a win condition outlined in userInputs. We can also put the required functions here
+//need to create second player. we have starting player, but no logic to tell program that the other will be the second. 
+// once we have both of the above, we can then create the order in which the game will be played. hopefully. 
