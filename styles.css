@@ -70,13 +70,22 @@
   height: 100%;
   padding: 0.5rem 0rem;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+.gameResults p {
+  font-size: clamp(0.5rem, 1.2rem, 1.5rem);
+  min-height: 30%;
 }
 .playerSelections {
+  width: 80%;
+  background-color: #fae9f9;
 }
 .newGame {
   width: 33%;
-  padding: 0.5rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   border: none;
   color: #fff;
   background-image: linear-gradient(30deg, #4a89f5, #fd46c9);
@@ -109,4 +118,10 @@
   100% {
     box-shadow: 0 0 0 0 rgb(218 103 68 / 0%);
   }
+}
+.gameResults .newGame {
+  font-size: 0.5rem;
+  padding: 0.3rem 0rem;
+  margin: 0;
+  width: 5rem;
 }
