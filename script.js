@@ -163,6 +163,7 @@ const userInputs = () => {
       return false;
     }
   };
+
   return { logInputX, logInputO, makeGrid, checkIfWinner };
 };
 
